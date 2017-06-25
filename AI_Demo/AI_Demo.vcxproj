@@ -147,6 +147,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseGameEntity.cpp" />
+    <ClCompile Include="CrudeTimer.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MessageDispatcher.cpp" />
     <ClCompile Include="Miner.cpp" />
@@ -158,6 +160,8 @@
   <ItemGroup>
     <ClInclude Include="BaseGameEntity.h" />
     <ClInclude Include="ControlUtils.h" />
+    <ClInclude Include="CrudeTimer.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="EntityName.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="MessageDispatcher.h" />

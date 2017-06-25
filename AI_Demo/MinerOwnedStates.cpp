@@ -1,5 +1,11 @@
 #include "MinerOwnedStates.h"
+#include "EntityName.h"
+#include "MessageDispatcher.h"
+#include "MessageType.h"
+
+
 #include <iostream>
+
 using namespace std;
 
 
@@ -14,6 +20,7 @@ void GoHomeAndSleep::Enter(Miner * miner)
 	if (miner->GetLocation() != goldMine)
 	{
 		miner->SetLocation(goldMine);
+		Dispatch->DispatchMessage(0, miner->GetID(), name_Elsa, msg_ImHome, "我要吃小鸡炖蘑菇");
 		cout << "回家准备睡觉" << endl;
 	}
 }
@@ -22,12 +29,17 @@ void GoHomeAndSleep::Execute(Miner * miner)
 {
 	miner->DecreaseFatigue();
 	cout << "在家睡觉" << endl;
-	//miner->ChangeState(VisitBankAndDepositGold::Instance());
+
 }
 
 void GoHomeAndSleep::Exit(Miner * miner)
 {
 	cout << "离开家" << endl;
+}
+
+bool GoHomeAndSleep::OnMessage(Miner *, const Telegram &)
+{
+	return true;
 }
 
 
@@ -69,6 +81,11 @@ void EnterMineAndDigForNugget::Execute(Miner * miner)
 void EnterMineAndDigForNugget::Exit(Miner * miner)
 {
 	cout << "离开矿洞" << endl;
+}
+
+bool EnterMineAndDigForNugget::OnMessage(Miner *, const Telegram &)
+{
+	return true;
 }
 
 
@@ -114,6 +131,11 @@ void VisitBankAndDepositGold::Exit(Miner * miner)
 	cout << "离开银行" << endl;
 }
 
+bool VisitBankAndDepositGold::OnMessage(Miner *, const Telegram &)
+{
+	return true;
+}
+
 
 //-----------------------
 
@@ -142,4 +164,9 @@ void QuenchThirst::Execute(Miner * miner)
 void QuenchThirst::Exit(Miner * miner)
 {
 	cout << "离开酒吧" << endl;
+}
+
+bool QuenchThirst::OnMessage(Miner *, const Telegram &)
+{
+	return true;
 }

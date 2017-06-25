@@ -42,6 +42,21 @@ public:
 		}
 	}
 
+	bool HandleMessage(const Telegram & msg)
+	{
+		if (m_pCurrentState && m_pCurrentState->OnMessage(pOwner, msg))
+		{
+			return true;
+		}
+
+		if (m_pGlobalState && m_pGlobalState->OnMessage(pOwner, msg))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	void ChangeState(State<T>* pNewState)
 	{
 		m_pPreviousState = m_pCurrentState;

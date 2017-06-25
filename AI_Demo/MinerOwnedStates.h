@@ -18,6 +18,8 @@ public:
 	virtual void Execute(Miner* miner);
 
 	virtual void Exit(Miner* miner);
+
+	virtual bool OnMessage(Miner*, const Telegram&);
 };
 
 
@@ -39,6 +41,9 @@ public:
 	virtual void Execute(Miner* miner);
 
 	virtual void Exit(Miner* miner);
+
+	virtual bool OnMessage(Miner*, const Telegram&);
+
 };
 
 
@@ -60,6 +65,9 @@ public:
 	virtual void Execute(Miner* miner);
 
 	virtual void Exit(Miner* miner);
+
+	virtual bool OnMessage(Miner*, const Telegram&);
+
 };
 
 
@@ -81,4 +89,7 @@ public:
 	virtual void Execute(Miner* miner);
 
 	virtual void Exit(Miner* miner);
+
+	virtual bool OnMessage(Miner*, const Telegram&);
+
 };

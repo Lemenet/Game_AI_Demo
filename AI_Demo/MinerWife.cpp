@@ -8,7 +8,7 @@ using namespace std;
 
 inline int RandInt(int min, int max)
 {
-	srand(time(0));
+	srand(static_cast<unsigned int>(time(0)));
 	return rand() % (max - min + 1) + min;
 }
 
@@ -44,5 +44,6 @@ void MinerWife::Update()
 
 bool MinerWife::HandleMessage(const Telegram & msg)
 {
-	return false;
+	m_pStateMachine->HandleMessage(msg);
+	return true;
 }

@@ -1,20 +1,23 @@
 #pragma once
+
 #include <string>
 using namespace std;
 
+
 enum Name
 {
-	Miner = 100,
-	Elsa,
+	name_Miner = 100,
+	name_Elsa,
 };
 
-string GetEntityName(int name)
+
+inline string GetEntityName(int name)
 {
 	switch (name)
 	{
-	case Miner:
+	case name_Miner:
 		return string("¿ó¹¤");
-	case Elsa:
+	case name_Elsa:
 		return string("°¬ÀöÈø");
 	default:
 		return string("Error");

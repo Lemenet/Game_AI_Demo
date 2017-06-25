@@ -20,6 +20,8 @@ public:
 	virtual void Execute(MinerWife* wife);
 
 	virtual void Exit(MinerWife* wife);
+
+	virtual bool OnMessage(MinerWife*, const Telegram&);
 };
 
 
@@ -42,6 +44,9 @@ public:
 	virtual void Execute(MinerWife* wife);
 
 	virtual void Exit(MinerWife* wife);
+
+	virtual bool OnMessage(MinerWife*, const Telegram&);
+
 };
 
 
@@ -64,4 +69,7 @@ public:
 	virtual void Execute(MinerWife* wife);
 
 	virtual void Exit(MinerWife* wife);
+
+	virtual bool OnMessage(MinerWife*, const Telegram&);
+
 };

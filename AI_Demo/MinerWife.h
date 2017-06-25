@@ -3,7 +3,7 @@
 #include "Location.h"
 #include "StateMachine.h"
 
-class MinerWife : BaseGameEntity
+class MinerWife : public BaseGameEntity
 {
 public:
 	MinerWife(int id);

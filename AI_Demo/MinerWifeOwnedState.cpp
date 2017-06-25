@@ -7,7 +7,7 @@ using namespace std;
 
 inline int RandInt(int min, int max)
 {
-	srand(time(0));
+	srand(static_cast<unsigned int>(time(0)));
 	return rand() % (max - min + 1) + min;
 }
 
@@ -26,7 +26,7 @@ void WifeGlobalState::Enter(MinerWife * wife)
 	if (wife->GetLocation() != bathroom)
 	{
 		wife->SetLocation(bathroom);
-		cout << GetEntityName(Elsa) << "进入厕所" << endl;
+		//cout << GetEntityName(name_Elsa) << "进入厕所" << endl;
 	}
 }
 
@@ -42,6 +42,12 @@ void WifeGlobalState::Execute(MinerWife * wife)
 void WifeGlobalState::Exit(MinerWife * wife)
 {
 	cout << "离开厕所" << endl;
+}
+
+bool WifeGlobalState::OnMessage(MinerWife *, const Telegram &)
+{
+	cout << "\n Elsa 1" << endl;
+	return true;
 }
 
 
@@ -62,7 +68,7 @@ void DoHouseWork::Enter(MinerWife * wife)
 	if (wife->GetLocation() != shack)
 	{
 		wife->SetLocation(shack);
-		cout << GetEntityName(Elsa) << "进入家" << endl;
+		//cout << GetEntityName(name_Elsa) << "进入家" << endl;
 	}
 }
 
@@ -93,6 +99,12 @@ void DoHouseWork::Exit(MinerWife * wife)
 	cout << "离开家" << endl;
 }
 
+bool DoHouseWork::OnMessage(MinerWife *, const Telegram &)
+{
+	cout << "\n Elsa 2" << endl;
+	return true;
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -110,7 +122,7 @@ void VisitBathroom::Enter(MinerWife * wife)
 	if (wife->GetLocation() != bathroom)
 	{
 		wife->SetLocation(bathroom);
-		cout << GetEntityName(Elsa) << "进入厕所" << endl;
+		//cout << GetEntityName(name_Elsa) << "进入厕所" << endl;
 	}
 }
 
@@ -124,4 +136,10 @@ void VisitBathroom::Execute(MinerWife * wife)
 void VisitBathroom::Exit(MinerWife * wife)
 {
 	cout << "离开厕所" << endl;
+}
+
+bool VisitBathroom::OnMessage(MinerWife *, const Telegram &)
+{
+	cout << "\n Elsa 3" << endl;
+	return true;
 }
