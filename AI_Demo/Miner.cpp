@@ -10,14 +10,16 @@ Miner::Miner(int id) :
 	BaseGameEntity(id),
 	m_location(shack),
 	m_iGoldCarried(0),
+	m_goldToday(0),
 	m_iMoneyBank(0),
 	m_iThirst(0),
-	m_iFatigue(0)
-	{
-		m_pStateMachine = new StateMachine<Miner>(this);
-		m_pStateMachine->SetCurrentState(EnterMineAndDigForNugget::Instance());
+	m_iFatigue(0),
+	m_bHasMeal(true)
+{
+	m_pStateMachine = new StateMachine<Miner>(this);
+	m_pStateMachine->SetCurrentState(EnterMineAndDigForNugget::Instance());
 
-	}
+}
 
 
 Miner::~Miner()
@@ -34,7 +36,8 @@ void Miner::Update()
 
 bool Miner::HandleMessage(const Telegram & msg)
 {
-	return false;
+	m_pStateMachine->HandleMessage(msg);
+	return true;
 }
 
 
@@ -44,6 +47,7 @@ void Miner::PrintInfor()
 	cout << "口渴： " << m_iThirst << endl;
 	cout << "存款：" << m_iMoneyBank << endl;
 	cout << "口袋：" << m_iGoldCarried << endl;
+	cout << "今天的挖矿数" << m_goldToday << endl;
 }
 
 void Miner::AddToGoldCarried(const int val)

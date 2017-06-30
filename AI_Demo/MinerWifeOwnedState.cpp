@@ -1,7 +1,9 @@
-#include "MinerWifeOwnedState.h"
-#include "EntityName.h"
 #include <iostream>
 #include <time.h>
+#include "MinerWifeOwnedState.h"
+#include "EntityName.h"
+#include "MessageType.h"
+#include "MessageDispatcher.h"
 
 using namespace std;
 
@@ -26,7 +28,7 @@ void WifeGlobalState::Enter(MinerWife * wife)
 	if (wife->GetLocation() != bathroom)
 	{
 		wife->SetLocation(bathroom);
-		//cout << GetEntityName(name_Elsa) << "进入厕所" << endl;
+		cout << GetEntityName(name_Elsa) << "进入厕所" << endl;
 	}
 }
 
@@ -68,7 +70,7 @@ void DoHouseWork::Enter(MinerWife * wife)
 	if (wife->GetLocation() != shack)
 	{
 		wife->SetLocation(shack);
-		//cout << GetEntityName(name_Elsa) << "进入家" << endl;
+		cout << GetEntityName(name_Elsa) << "开始做家务" << endl;
 	}
 }
 
@@ -96,13 +98,25 @@ void DoHouseWork::Execute(MinerWife * wife)
 
 void DoHouseWork::Exit(MinerWife * wife)
 {
-	cout << "离开家" << endl;
+	cout << "停止做家务" << endl;
 }
 
-bool DoHouseWork::OnMessage(MinerWife *, const Telegram &)
+bool DoHouseWork::OnMessage(MinerWife * minerWife, const Telegram & receivedTelegram)
 {
-	cout << "\n Elsa 2" << endl;
-	return true;
+	switch (receivedTelegram.msg)
+	{
+	case msg_ImHome:
+		Dispatch->DispatchMessage(3, minerWife->GetID(), name_Elsa, msg_MealReady, "我来做饭，你先休息");
+		return true;
+
+	case msg_MealReady:
+		Dispatch->DispatchMessage(0, minerWife->GetID(), name_Miner, msg_MealReady, "饭做好了，来吃饭吧");
+		return true;
+
+	default:
+		break;
+	}
+	
 }
 
 
@@ -122,13 +136,13 @@ void VisitBathroom::Enter(MinerWife * wife)
 	if (wife->GetLocation() != bathroom)
 	{
 		wife->SetLocation(bathroom);
-		//cout << GetEntityName(name_Elsa) << "进入厕所" << endl;
+		cout << GetEntityName(name_Elsa) << "进入厕所" << endl;
 	}
 }
 
 void VisitBathroom::Execute(MinerWife * wife)
 {
-	cout << "去上厕所" << endl;
+	cout << "正在上厕所" << endl;
 	wife->GetFSM()->RevertToPreviousState();
 
 }
@@ -138,8 +152,21 @@ void VisitBathroom::Exit(MinerWife * wife)
 	cout << "离开厕所" << endl;
 }
 
-bool VisitBathroom::OnMessage(MinerWife *, const Telegram &)
+bool VisitBathroom::OnMessage(MinerWife * minerWife, const Telegram & receivedTelegram)
 {
-	cout << "\n Elsa 3" << endl;
-	return true;
+	switch (receivedTelegram.msg)
+	{
+	case msg_ImHome:
+		cout << "我来做饭，你先休息" << endl;
+		Dispatch->DispatchMessage(3, name_Elsa, name_Elsa, msg_MealReady, nullptr);
+		return true;
+
+	case msg_MealReady:
+		cout << "饭做好了，来吃饭吧" << endl;
+		Dispatch->DispatchMessage(0, minerWife->GetID(), name_Miner, msg_MealReady, nullptr);
+		return true;
+
+	default:
+		break;
+	}
 }

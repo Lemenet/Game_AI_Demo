@@ -17,11 +17,11 @@ int main(int argc, char** argv)
 	EntityM->RegisterEntity(Bob);
 	EntityM->RegisterEntity(Elsa);
 
-	while (i < 20)
+	while (i < 99)
 	{
-		//system("cls");
-		//cout << i << endl;
-		//miner.PrintInfor();
+		system("cls");
+		cout << i << endl;
+		Bob->PrintInfor();
 		Bob->Update();
 		Elsa->Update();
 

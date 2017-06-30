@@ -19,7 +19,7 @@ void MessageDispatcher::Discharge(BaseGameEntity * pReceiver, const Telegram& ms
 {
 	if (!pReceiver->HandleMessage(msg))
 	{
-		std::cout << "消息没被接管" << std::endl;
+		std::cout << "Debug: Message to "<< GetEntityName(pReceiver->GetID()) <<" 消息没被接管,已被丢弃" << std::endl;
 	}
 }
 
@@ -37,7 +37,11 @@ void MessageDispatcher::DispatchMessage(double delay, int sender, int receiver, 
 
 	if (delay <= 0.f)
 	{
-		std::cout << "\n" << GetEntityName(pSender->GetID()) << "------->>>" << GetEntityName(pReceiver->GetID()) << "消息内容是" << MsgToStr((Message_Type)msg) << endl;
+		//std::cout << "\n" << GetEntityName(pSender->GetID()) << "------->>>" << GetEntityName(pReceiver->GetID()) << "消息内容是" << MsgToStr((Message_Type)msg) << endl;
+		if (nullptr != extraInfo)
+		{
+			std::cout << std::string((char*)extraInfo) << endl;
+		}
 		Discharge(pReceiver, telegram);
 	}
 	else
@@ -46,7 +50,7 @@ void MessageDispatcher::DispatchMessage(double delay, int sender, int receiver, 
 
 		telegram.dispatchTime = delay + currentTime;
 		PriorityQ.insert(telegram);
-		std::cout << "\n延时处理" << GetEntityName(pSender->GetID()) << "延时响应时间为" << Clock->GetCurrentTime() << "for" << GetEntityName(pReceiver->GetID()) << "Msg is" << MsgToStr((Message_Type)msg);
+		//std::cout << "\n延时处理" << GetEntityName(pSender->GetID()) << "延时响应时间为" << Clock->GetCurrentTime() << "for" << GetEntityName(pReceiver->GetID()) << "Msg is" << MsgToStr((Message_Type)msg);
 	}
 
 }
@@ -63,7 +67,7 @@ void MessageDispatcher::DispatchDelayMessage()
 		const Telegram& telegram = *PriorityQ.begin();
 		BaseGameEntity* pReceiver = EntityM->GetEntityFromId(telegram.receiver);
 
-		std::cout << "\n队列消息已经被发送，发送到：" << GetEntityName(pReceiver->GetID()) << "Msg is " << MsgToStr((Message_Type)telegram.msg);
+		//std::cout << "\n队列消息已经被发送，发送到：" << GetEntityName(pReceiver->GetID()) << "Msg is " << MsgToStr((Message_Type)telegram.msg);
 		Discharge(pReceiver, telegram);
 		PriorityQ.erase(PriorityQ.begin());
 	}

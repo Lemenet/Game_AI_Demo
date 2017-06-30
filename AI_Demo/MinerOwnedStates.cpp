@@ -19,16 +19,30 @@ void GoHomeAndSleep::Enter(Miner * miner)
 {
 	if (miner->GetLocation() != goldMine)
 	{
+		miner->InitialGoldToday();
 		miner->SetLocation(goldMine);
-		Dispatch->DispatchMessage(0, miner->GetID(), name_Elsa, msg_ImHome, "我要吃小鸡炖蘑菇");
 		cout << "回家准备睡觉" << endl;
+		Dispatch->DispatchMessage(0, miner->GetID(), name_Elsa, msg_ImHome, "我要吃小鸡炖蘑菇");
 	}
 }
 
 void GoHomeAndSleep::Execute(Miner * miner)
 {
-	miner->DecreaseFatigue();
-	cout << "在家睡觉" << endl;
+	if (miner->IsEnergetic())
+	{
+		if (miner->HasMealed())
+		{
+			cout << "休息好了，也吃晚饭了，要准备去工作了" << endl;
+			miner->GetFSM()->ChangeState(EnterMineAndDigForNugget::Instance());
+			return;
+		}
+		cout << "在家休息，等着吃饭" << endl;
+	}
+	else
+	{
+		miner->DecreaseFatigue();
+		cout << "在家睡觉" << endl;
+	}
 
 }
 
@@ -37,8 +51,15 @@ void GoHomeAndSleep::Exit(Miner * miner)
 	cout << "离开家" << endl;
 }
 
-bool GoHomeAndSleep::OnMessage(Miner *, const Telegram &)
+bool GoHomeAndSleep::OnMessage(Miner * miner, const Telegram &)
 {
+	cout << "吃饭了，感觉又有力气了！！" << endl;
+	miner->SetMealState(true);
+	if (miner->IsEnergetic())
+	{
+		cout << "休息好了，也吃晚饭了，要准备去工作了" << endl;
+		miner->GetFSM()->ChangeState(EnterMineAndDigForNugget::Instance());
+	}
 	return true;
 }
 
@@ -64,6 +85,7 @@ void EnterMineAndDigForNugget::Enter(Miner * miner)
 void EnterMineAndDigForNugget::Execute(Miner * miner)
 {
 	miner->AddToGoldCarried(1);			//挖矿增加1金币
+	miner->AddGoldToday();			//GoldToday加1
 	cout << "正在矿洞挖矿" << endl;
 	miner->IncreaseFatigue();			//疲劳增加1
 	if (miner->PocketFull())
@@ -115,7 +137,7 @@ void VisitBankAndDepositGold::Execute(Miner * miner)
 	miner->SetGoldCarried(0);
 
 	/*cout << "存款余额" << miner->GetWealth() << endl;*/
-	if (miner->GetWealth() >= 5)
+	if (miner->GetGoldToday() >= 5)
 	{
 		cout << "很满意，今天工作结束" << endl;
 		miner->GetFSM()->ChangeState(GoHomeAndSleep::Instance());
