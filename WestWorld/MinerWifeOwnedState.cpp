@@ -116,7 +116,7 @@ bool DoHouseWork::OnMessage(MinerWife * minerWife, const Telegram & receivedTele
 	default:
 		break;
 	}
-	
+	return false;
 }
 
 
@@ -169,4 +169,6 @@ bool VisitBathroom::OnMessage(MinerWife * minerWife, const Telegram & receivedTe
 	default:
 		break;
 	}
+
+	return false;
 }
