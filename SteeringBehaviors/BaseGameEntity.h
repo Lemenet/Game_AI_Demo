@@ -19,12 +19,19 @@
 
 struct Telegram;
 
+namespace EEntityType
+{
+	enum type
+	{
+		default = -1,
+	};
+}
 
 class BaseGameEntity
 {
 public:
 
-	enum { default_entity_type = -1 };
+	
 
 private:
 
@@ -38,7 +45,7 @@ private:
 	bool bTag_;
 
 	//used by the constructor to give each entity a unique ID
-	inline int NextVelidID()
+	int NextVelidID()
 	{
 		static int NextID = 0;
 		return NextID++;
@@ -53,15 +60,38 @@ protected:
 	Vector2D scale_;
 
 	//The length of this object's bounding radius
-	double boundingRadius;
+	double boundingRadius_;
 
 
 protected:
 	//------Constroctor-------
 
-	BaseGameEntity();
+	BaseGameEntity() :
+		ID_(NextVelidID()),
+		boundingRadius_(0.0),
+		position_(Vector2D()),
+		scale_(Vector2D(1.0, 1.0)),
+		entityType_(EEntityType::default),
+		bTag_(false)
+	{}
 
-	BaseGameEntity(int entityType);
+	BaseGameEntity(int entityType) :
+		ID_(NextVelidID()),
+		boundingRadius_(0.0),
+		position_(Vector2D()),
+		scale_(Vector2D(1.0, 1.0)),
+		entityType_(entityType),
+		bTag_(false)
+	{}
+
+	BaseGameEntity(int entityType, Vector2D pos, double r) :
+		ID_(NextVelidID()),
+		boundingRadius_(r),
+		position_(pos),
+		scale_(Vector2D(1.0, 1.0)),
+		entityType_(entityType),
+		bTag_(false)
+	{}
 
 
 };
