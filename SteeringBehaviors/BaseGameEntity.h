@@ -60,7 +60,7 @@ protected:
 	Vector2D scale_;
 
 	//The length of this object's bounding radius
-	double boundingRadius_;
+	double dBoundingRadius_;
 
 
 protected:
@@ -68,7 +68,7 @@ protected:
 
 	BaseGameEntity() :
 		ID_(NextVelidID()),
-		boundingRadius_(0.0),
+		dBoundingRadius_(0.0),
 		position_(Vector2D()),
 		scale_(Vector2D(1.0, 1.0)),
 		entityType_(EEntityType::default),
@@ -77,7 +77,7 @@ protected:
 
 	BaseGameEntity(int entityType) :
 		ID_(NextVelidID()),
-		boundingRadius_(0.0),
+		dBoundingRadius_(0.0),
 		position_(Vector2D()),
 		scale_(Vector2D(1.0, 1.0)),
 		entityType_(entityType),
@@ -86,7 +86,7 @@ protected:
 
 	BaseGameEntity(int entityType, Vector2D pos, double r) :
 		ID_(NextVelidID()),
-		boundingRadius_(r),
+		dBoundingRadius_(r),
 		position_(pos),
 		scale_(Vector2D(1.0, 1.0)),
 		entityType_(entityType),
@@ -101,7 +101,7 @@ protected:
 
 	BaseGameEntity(int entityType, int ForcedID) :
 		ID_(ForcedID),
-		boundingRadius_(0.0),
+		dBoundingRadius_(0.0),
 		position_(Vector2D()),
 		scale_(Vector2D(1.0, 1.0)),
 		entityType_(entityType),
@@ -125,15 +125,15 @@ public:
 
 
 public:
-	//----------Interface----------
+	//----------Accessors----------
 
 	//position_
 	Vector2D GetPosition() const { return position_; }
 	void SetPosition(const Vector2D& newPosition) { position_ = newPosition; }
 
 	//boundingRadius_
-	double GetRadius() const { return boundingRadius_; }
-	void SetRadius(double r) { boundingRadius_ = r; }
+	double GetRadius() const { return dBoundingRadius_; }
+	void SetRadius(double r) { dBoundingRadius_ = r; }
 	
 	//ID_
 	int GetID() const { return ID_; }
@@ -147,12 +147,12 @@ public:
 	Vector2D GetScale() const { return scale_; }
 	void SetScale(const Vector2D& val)
 	{
-		boundingRadius_ *= MaxOf(val.x, val.y) / MaxOf(scale_.x, scale_.y);
+		dBoundingRadius_ *= MaxOf(val.x, val.y) / MaxOf(scale_.x, scale_.y);
 		scale_ = val;
 	}
 	void SetScale(double val)
 	{
-		boundingRadius_ *= (val / MaxOf(scale_.x, scale_.y));
+		dBoundingRadius_ *= (val / MaxOf(scale_.x, scale_.y));
 		scale_ = Vector2D(val, val);
 	}
 
