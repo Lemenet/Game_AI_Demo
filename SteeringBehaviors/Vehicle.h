@@ -22,7 +22,7 @@
 class GameWorld;
 class SteeringBehavior;
 
-class Vehicle : MovingEntity
+class Vehicle : public MovingEntity
 {
 
 private:

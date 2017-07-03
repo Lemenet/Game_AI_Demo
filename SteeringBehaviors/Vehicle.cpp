@@ -1,7 +1,7 @@
 #include "Vehicle.h"
 #include "2D/C2DMatrix.h"
 #include "2D/geometry.h"
-//#include "SteeringBehavior"
+#include "SteeringBehavior.h"
 #include "2D/Transformations.h"
 //#include "GameWorld.h"
 #include "misc/CellSpacePartition.h"
