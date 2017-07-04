@@ -69,3 +69,76 @@ void Vehicle::Update(double time_elapsed)
 	WrapAround(position_, pOwnedWorld_->cxClient(), pOwnedWorld_->cyClient());
 
 }
+
+
+//-------------------------------- Render -------------------------------------
+//-----------------------------------------------------------------------------
+void Vehicle::Render()
+{
+	//A vector to hold the transformed vertices
+	static std::vector<Vector2D> vVehicleVerticesTrans;
+
+	//Render neighboring vehicles in different colors if requested
+// 	if (pOwnedWorld_->RenderNeighbors())
+// 	{
+// 		if (GetID() == 0)
+// 		{
+// 			gdi->RedPen();
+// 		}
+// 		else if (IsTagged())
+// 		{
+// 			gdi->GreenPen();
+// 		}
+// 		else
+// 		{
+// 			gdi->BluePen();
+// 		}
+// 	}
+// 	else
+// 	{
+// 		gdi->BluePen();
+// 	}
+
+// 	if (Steering()->IsInterposeOn())
+// 	{
+// 		gdi->RedPen();
+// 	}
+// 
+// 	if (Steering()->IsHideOn())
+// 	{
+// 		gdi->GreenPen();
+// 	}
+
+	if (IsSmoothingOn())
+	{
+		vVehicleVerticesTrans = WorldTransform(vVehicleShapeBuffer_, GetPosition(), SmoothedHeading(), SmoothedHeading().Perp(), GetScale());
+	}
+	else
+	{
+		vVehicleVerticesTrans = WorldTransform(vVehicleShapeBuffer_, GetPosition(), GetHeadDirection(), GetSide(), GetScale());
+	}
+
+	gdi->ClosedShape(vVehicleVerticesTrans);
+
+// 	if (pOwnedWorld_->ViewKeys())
+// 	{
+// 		Steering()->RenderAids();
+// 	}
+}
+
+//----------------------------- InitializeBuffer -----------------------------
+//
+//  fills the vehicle's shape buffer with its vertices
+//-----------------------------------------------------------------------------
+void Vehicle::InitializeBuffer()
+{
+	const int nVehicleVertics = 3;
+
+	Vector2D vehicle[nVehicleVertics] = { Vector2D(-1.f,0.6f),Vector2D(1.f,0.f),Vector2D(-1.f,-0.6f) };
+
+	//Setup the vertex buffer and calculate the bounding radius
+	for (int vtx = 0; vtx < nVehicleVertics; ++vtx)
+	{
+		vVehicleShapeBuffer_.push_back(vehicle[vtx]);
+	}
+}

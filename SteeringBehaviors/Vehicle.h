@@ -50,7 +50,7 @@ private:
 	double dTimeElapsed_;
 
 	//buffer for the vehicle shape
-	std::vector<Vector2D> vecVehicleShapeBuffer_;
+	std::vector<Vector2D> vVehicleShapeBuffer_;
 
 	//fills the buffer with vertex data
 	void InitializeBuffer();
@@ -78,5 +78,23 @@ public:
 	//updates the vehicle's position and orientation
 	void Update(double time_elapsed);
 
+	void Render();
 
+
+	//-------------------------------------------accessor methods
+	
+	//pSteering_
+	SteeringBehavior* const Steering()const { return pSteering_; }
+	GameWorld* const World()const { return pOwnedWorld_; }
+
+	//smoothedHeading_
+	Vector2D SmoothedHeading() const { return smoothedHeading_; }
+
+	//bSmoothingOn_
+	bool IsSmoothingOn() const { return bSmoothingOn_; }
+	void SmoothOn() { bSmoothingOn_ = true; }
+	void SmoothOff() { bSmoothingOn_ = false; }
+	void ToggleSmoothing() { bSmoothingOn_ = !bSmoothingOn_; }
+
+	double TimeElapsed() const { return dTimeElapsed_; }
 };
