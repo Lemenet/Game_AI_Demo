@@ -30,6 +30,12 @@
     <ClInclude Include="Constants.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GameWorld.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>资源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -41,5 +47,13 @@
     <ClCompile Include="SteeringBehavior.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GameWorld.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Script1.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

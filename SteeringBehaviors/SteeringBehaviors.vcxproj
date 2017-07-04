@@ -151,14 +151,20 @@
   <ItemGroup>
     <ClInclude Include="BaseGameEntity.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="MovingEntity.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="Vehicle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Script1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

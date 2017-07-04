@@ -3,7 +3,7 @@
 #include "2D/geometry.h"
 #include "SteeringBehavior.h"
 #include "2D/Transformations.h"
-//#include "GameWorld.h"
+#include "GameWorld.h"
 #include "misc/CellSpacePartition.h"
 #include "misc/Cgdi.h"
 
