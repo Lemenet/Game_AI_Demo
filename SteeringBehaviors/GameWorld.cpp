@@ -47,7 +47,31 @@ GameWorld::GameWorld(int cx, int cy) :
 	for (int a = 0; a < Prm.NumAgents; ++a)
 	{
 		//determine a random starting position
-		Vector2D SpawnPos = Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0,
-			cy / 2.0 + RandomClamped()*cy / 2.0);
+		Vector2D SpawnPos = Vector2D(cx / 2.0 + RandomClamped()*cx / 2.0, 
+									cy / 2.0 + RandomClamped()*cy / 2.0);
+
+		Vehicle* pVehicle = new Vehicle(this,
+			SpawnPos,					//Initial position
+			RandFloat()*TwoPi,			//Start rotation
+			Vector2D(0, 0),				//Velocity
+			Prm.VehicleMass,			//Mass
+			Prm.MaxSteeringForce,		//Max force
+			Prm.MaxSpeed,				//Max velocity
+			Prm.MaxTurnRatePerSecond,	//Max turn rate
+			Prm.VehicleScale			//Scale
+		);
+
+		pVehicle->Steering()->FlockingOn();
+		vAllVehicles_.push_back(pVehicle);
+
+		//Add if to the cell subdivision
+		pCellSpace_->AddEntity(pVehicle);
 	}
+
+
+#define SHOAL
+#ifdef SHOAL
+
+
+	
 }

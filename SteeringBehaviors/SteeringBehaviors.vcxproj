@@ -153,6 +153,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="MovingEntity.h" />
+    <ClInclude Include="ParamLoader.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="Vehicle.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ParamLoader.cpp" />
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>

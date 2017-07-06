@@ -109,33 +109,33 @@ public:
 
 
 	//handle WM_COMMAND messages
-	void        HandleKeyPresses(WPARAM wParam);
-	void        HandleMenuItems(WPARAM wParam, HWND hwnd);
+	void HandleKeyPresses(WPARAM wParam);
+	void HandleMenuItems(WPARAM wParam, HWND hwnd);
 
-	void        TogglePause() { bPaused_ = !bPaused_; }
-	bool        Paused()const { return bPaused_; }
+	void TogglePause() { bPaused_ = !bPaused_; }
+	bool Paused()const { return bPaused_; }
 
-	Vector2D    Crosshair()const { return crosshair_; }
-	void        SetCrosshair(POINTS p);
-	void        SetCrosshair(Vector2D v) { crosshair_ = v; }
+	Vector2D Crosshair()const { return crosshair_; }
+	void SetCrosshair(POINTS p);
+	void SetCrosshair(Vector2D v) { crosshair_ = v; }
 
-	int   cxClient()const { return nClientX_; }
-	int   cyClient()const { return nClientY_; }
+	int cxClient()const { return nClientX_; }
+	int cyClient()const { return nClientY_; }
 
-	bool  RenderWalls()const { return bShowWalls_; }
-	bool  RenderObstacles()const { return bShowObstacles_; }
-	bool  RenderPath()const { return bShowPath_; }
-	bool  RenderDetectionBox()const { return bShowDetectionBox_; }
-	bool  RenderWanderCircle()const { return bShowWanderCircle_; }
-	bool  RenderFeelers()const { return bShowFeelers_; }
-	bool  RenderSteeringForce()const { return bShowSteeringForce_; }
+	bool RenderWalls()const { return bShowWalls_; }
+	bool RenderObstacles()const { return bShowObstacles_; }
+	bool RenderPath()const { return bShowPath_; }
+	bool RenderDetectionBox()const { return bShowDetectionBox_; }
+	bool RenderWanderCircle()const { return bShowWanderCircle_; }
+	bool RenderFeelers()const { return bShowFeelers_; }
+	bool RenderSteeringForce()const { return bShowSteeringForce_; }
 
-	bool  RenderFPS()const { return bShowFPS_; }
-	void  ToggleShowFPS() { bShowFPS_ = !bShowFPS_; }
+	bool RenderFPS()const { return bShowFPS_; }
+	void ToggleShowFPS() { bShowFPS_ = !bShowFPS_; }
 
-	void  ToggleRenderNeighbors() { bShowRenderNeighbors_ = !bShowRenderNeighbors_; }
-	bool  RenderNeighbors()const { return bShowRenderNeighbors_; }
+	void ToggleRenderNeighbors() { bShowRenderNeighbors_ = !bShowRenderNeighbors_; }
+	bool RenderNeighbors()const { return bShowRenderNeighbors_; }
 
-	void  ToggleViewKeys() { bViewKeys_ = !bViewKeys_; }
-	bool  ViewKeys()const { return bViewKeys_; }
+	void ToggleViewKeys() { bViewKeys_ = !bViewKeys_; }
+	bool ViewKeys()const { return bViewKeys_; }
 };
