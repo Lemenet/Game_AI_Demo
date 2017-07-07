@@ -13,7 +13,7 @@
 #include "misc/iniFileLoaderBase.h"
 #include "misc/utils.h"
 
-
+#define  Prm (*ParamLoader::Instance())
 
 class ParamLoader : public iniFileLoaderBase
 {

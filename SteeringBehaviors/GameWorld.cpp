@@ -10,7 +10,7 @@
 #include "SteeringBehavior.h"
 #include "Time/PrecisionTimer.h"
 #include "misc/Smoother.h"
-//#include "ParammLoader.h"
+#include "ParamLoader.h"
 #include "misc/WindowUtils.h"
 #include "misc/Stream_Utility_Functions.h"
 
@@ -32,7 +32,7 @@ GameWorld::GameWorld(int cx, int cy) :
 	bShowDetectionBox_(false),
 	bShowFPS_(true),
 	dAverageFrameTime_(0),
-	pPath_(NULL),
+	pPath_(nullptr),
 	bShowRenderNeighbors_(false),
 	bViewKeys_(false),
 	bShowCellSpaceInfo_(false)
@@ -71,7 +71,61 @@ GameWorld::GameWorld(int cx, int cy) :
 
 #define SHOAL
 #ifdef SHOAL
+// 	vAllVehicles_[Prm.NumAgents - 1]->Steering()->FlockingOff();
+// 	vAllVehicles_[Prm.NumAgents - 1]->SetScale(Vector2D(10, 10));
+// 	vAllVehicles_[Prm.NumAgents - 1]->Steering()->WanderOn();
+// 	vAllVehicles_[Prm.NumAgents - 1]->SetMaxSpeed(70);
+// 
+// 	for (int i = 0; i < Prm.NumAgents - 1; ++i)
+// 	{
+// 		vAllVehicles_[i]->Steering()->EvadeOn(vAllVehicles_[Prm.NumAgents - 1]);
+// 	}
 
-
+#endif
 	
+	//create any obstacles or walls
+	//CreateObstacles();
+	//CreateWalls();
+
+}
+
+//-------------------------------- dtor ----------------------------------
+//------------------------------------------------------------------------
+GameWorld::~GameWorld()
+{
+	for (unsigned int a = 0; a < vAllVehicles_.size(); ++a)
+	{
+		delete vAllVehicles_[a];
+	}
+
+	for (unsigned int ob = 0; ob < vObstacles_.size(); ++ob)
+	{
+		delete vObstacles_[ob];
+	}
+
+	delete pCellSpace_;
+
+	delete pPath_;
+}
+
+//----------------------------- Update -----------------------------------
+//------------------------------------------------------------------------
+void GameWorld::Update(double time_elapsed)
+{
+	if (bPaused_)
+	{
+		return;
+	}
+
+	//Create a smoother to smooth the framerate
+	const int SampleRate = 10;
+	static Smoother<double> FrameRateSmoother(SampleRate, 0.0);
+
+	dAverageFrameTime_ = FrameRateSmoother.Update(time_elapsed);
+
+	//Update the vehicles
+	for (unsigned int a = 0; a < vAllVehicles_.size(); ++a)
+	{
+		vAllVehicles_[a]->Update(time_elapsed);
+	}
 }

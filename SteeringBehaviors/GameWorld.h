@@ -89,6 +89,7 @@ public:
 
 
 
+	/*
 	void  NonPenetrationContraint(Vehicle* v) { EnforceNonPenetrationConstraint(v, vAllVehicles_); }
 
 	void  TagVehiclesWithinViewRange(BaseGameEntity* pVehicle, double range)
@@ -100,6 +101,7 @@ public:
 	{
 		TagNeighbors(pVehicle, Obstacles(), range);
 	}
+	*/
 
 	const std::vector<Wall2D>&          Walls() { return vWalls_; }
 	CellSpacePartition<Vehicle*>*       CellSpace() { return pCellSpace_; }
