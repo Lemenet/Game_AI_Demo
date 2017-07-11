@@ -154,6 +154,7 @@
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="ParamLoader.h" />
+    <ClInclude Include="Path.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="Vehicle.h" />
@@ -166,7 +167,7 @@
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Script1.rc" />
+    <ResourceCompile Include="SteeringBehaviors1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
