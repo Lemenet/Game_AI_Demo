@@ -25,7 +25,7 @@ private:
 		MinObstacleRadius = GetNextParameterFloat();
 		MaxObstacleRadius = GetNextParameterFloat();
 
-		NumCellsX - GetNextParameterInt();
+		NumCellsX = GetNextParameterInt();
 		NumCellsY = GetNextParameterInt();
 
 		NumSamplesForSmoothing = GetNextParameterInt();

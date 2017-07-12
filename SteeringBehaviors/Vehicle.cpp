@@ -41,7 +41,7 @@ void Vehicle::Update(double time_elapsed)
 {
 	//calculate the combined force from each steering behavior in the 
 	//vehicle's list
-	Vector2D steeringForce = pSteering_->Calculate();
+	Vector2D steeringForce = pSteering_->Calculate;
 
 	//Acceleration = Force/Mass
 	Vector2D acceleration = steeringForce / dMass_;
